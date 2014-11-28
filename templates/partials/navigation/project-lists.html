@@ -1,0 +1,33 @@
+<!-- Path to image generator -->
+{% set resizewidththumb ='render/w420-c1:1-q95/' %}
+
+{% for child in page.root %}
+  {% if child.children %}
+    <div class="projects-feed fade-in one">
+    {% for child in child.children %}
+      <article class="project {{ child.id }}">
+        <!-- <p class="date col one">{{ child.date | date("M Y") }}</p> -->
+          <a href="{{ child.url }}">
+            <div class="thumb">
+            {% if child.thumb %}
+
+              <!-- Thumbs to URL at full Size -->
+              <!-- <img src="{{ child.thumb.url }}" width="{{ child.thumb.width }}" height="{{ child.thumb.height }}" class="project-thumb" alt=""> -->
+
+              <!-- Use image generator, strip content folder from image path -->
+              <img src="{{ resizewidththumb }}{{ child.thumb.url |replace({'/content': ''}) }}" alt="" width="{{ child.thumb.width }}" height="{{ child.thumb.height }}">
+
+            {% endif %}
+            </div>
+          </a>
+        <h2 class="title fade-in three">
+          <a href="{{ child.url }}">{{ child.title }}</a>
+        </h2>
+        <div class="tags fade-in three">
+          {{  child.keywords  }}
+        </div>
+      </article>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endfor %}

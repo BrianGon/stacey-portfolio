@@ -1,6 +1,9 @@
 # Stacey 3.0.0
 
 ## Overview
+Responsive portfolio style template for Stacey 3.0.0
+Modified from the default template for use on my own website and shared here for public usage.
+
 Stacey takes content from `.yml` files, image files and implied directory structure and generates a website.
 It is a no-database, dynamic website generator.
 

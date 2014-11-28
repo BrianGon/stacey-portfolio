@@ -1,0 +1,58 @@
+<script type="text/javascript" charset="utf-8" src="{{ page.root_path }}/public/docs/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{{ page.root_path }}/public/docs/js/jquery-ui.js"></script>
+<script type="text/javascript" src="{{ page.root_path }}/public/docs/js/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="{{ page.root_path }}/public/docs/js/jquery.unveil.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+	// Lazy load images
+    $(".image img").unveil(200, function () {
+        $(this).load(function () {
+            $(this).addClass("fade-in");
+        });
+    });
+
+    // Toggle mobile menu on button click
+    $(".nav-menu-button").bind("click", function () {
+        $("#projects-nav").stop().slideToggle(700,"easeInOutQuart");
+    });
+    // Add js class to disable css effect
+    $("body").addClass("js-enabled");
+    // Show mobile menu on button hover
+    // $(".nav-menu-button").hover(function () {
+    //     $("#projects-nav").stop( true, true ).slideDown(700,"easeInOutQuart");
+    //     // Hide mobile menu on nav mouseleave
+    //     $( "nav" ).mouseleave(function() {
+    //       $("#projects-nav").stop( true, true ).slideUp(700,"easeInOutQuart");
+    //     });
+    // });
+
+	// If the window is resized again
+	$( window ).resize(function() {
+		// Remove js toggle inline attribute for CSS to work
+		$('#projects-nav').removeAttr("style");
+	});
+
+	// fadeIn on mobile breakpoint
+    var toggle = $(window).width() < 1035;
+    $(window).on('resize', function (event) {
+
+        if ($(window).width() >= 1035 && toggle) {
+            $('body').hide().removeClass("fade-in half");
+	    	setTimeout(function(){
+	        	$('body').addClass("fade-in half").removeAttr("style");
+	        }, 400);
+            toggle = false;
+        } else if ($(window).width() < 1035 && !toggle) {
+            $('body').hide().removeClass("fade-in half");
+	    	setTimeout(function(){
+	        	$('body').addClass("fade-in half").removeAttr("style");
+	        }, 400);
+            toggle = true;
+        }
+
+    });
+
+});
+</script>
+

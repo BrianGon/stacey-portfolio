@@ -1,8 +1,47 @@
-<ul id="navigation" class="col two">
-  {% for child in page.root %}
-    <li>
-      <a href="{{ child.url }}">{{ child.title }}</a>
-      {% include 'partials/navigation/children.html' with { 'page' : child } %}
-    </li>
-  {% endfor %}
-</ul>
+<nav role="navigation" class="">
+	<!-- <h3 class="pages-nav-title nav-title">Find Me</h3> -->
+	<ul id="links-nav no-menu">
+		<li class="">
+			<a href="#" target="_blank">Put</a>
+		</li>
+		<li class="">
+			<a href="#" target="_blank">Personal</a>
+		</li>
+		<li class="">
+			<a href="#" target="_blank">Links</a>
+		</li>
+		<li class="">
+			<a href="#" target="_blank">Here</a>
+		</li>
+	</ul>
+
+	<!-- Mobile Menu Button = -->
+	<h3 class="nav-menu-button">&#x2630;</h3>
+
+	<ul id="projects-nav" >
+
+		<!-- Projects -->
+		<h3 class="nav-title">Work</h3>
+		  {% for child in page.root %}
+			<!-- if nav link has no children class=pagelink -->
+		    {% if child.children_count > 0 %}
+		    <li class="categorynav">
+		      <!-- Disable category link, show only children projects -->
+		      <!-- <a href="{{ child.url }}">{{ child.title }}</a> -->
+		      {% include 'partials/navigation/children.html' with { 'page' : child } %}
+		    </li>
+		    {% endif %}
+		  {% endfor %}
+
+		<!-- Pages with no children -->
+		<h3 class="nav-title">Pages</h3>
+		  {% for child in page.root %}
+			<!-- if nav link has no children, list and class=pagenav -->
+		    {% if child.children_count == 0 %}
+		    <li class="pagenav">
+		      <a href="{{ child.url }}">{{ child.title }}</a>
+		    </li>
+		    {% endif %}
+		  {% endfor %}
+	</ul>
+</nav>
