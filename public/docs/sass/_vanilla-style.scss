@@ -1,4 +1,30 @@
+/*
+Template Name: Vanilla
+Author: Mark Southard
+Author URI: http://www.dunked.com
+Description: The perfect starter template. A clean, minimal, grid-based layout focusing attention on your work.
+*/
 
+/*=================================*/
+/*	Table of Contents
+/*	- Reset & Clearfix Styles
+/*	- Main Styles
+/*		- Titles
+/*		- Projects Feed
+/*			- Project Assets
+/*			- Project Content
+/*		- Pages
+/*	- Navigation Styles
+/*	- Footer Styles
+/*	- Structure
+/*	- Media Queries
+/*		- 1455px
+/*		- 1210px
+/*		- 965px
+/*		- 700px
+/*		- 455px
+/*		- 210px
+/*		- Retina & HiDPI
 /*=================================*/
 
 /*=================================*/
@@ -63,7 +89,7 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
-h1,h2,h3,h4,h5,h6 { font-family: $FontSiteTitle; }
+h1,h2,h3,h4,h5,h6 { font-family: $FontSiteTitle; font-weight: 400;}
 
 h1 { font-size: 24px; }
 
@@ -249,14 +275,26 @@ div.video {
 }
 
 .page-content ul {
-	list-style-type: circle;
-	margin-left: 30px;
+	// list-style-type: circle;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 	padding: 0;
+	// inline boxes
+	list-style: none;
+	li {
+		display: inline-block;
+		padding: 6px 8px;
+		border: 2px solid $ColorSmallHeadings;
+		border-radius: 3px;
+		margin-bottom: 10px;
+	}
 }
 
 .page-content ol {
 	list-style-type: decimal;
 	margin-left: 30px;
+	margin-bottom: 20px;
 	padding: 0;
 }
 
