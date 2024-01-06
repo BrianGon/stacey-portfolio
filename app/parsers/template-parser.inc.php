@@ -15,7 +15,7 @@ Class TemplateParser {
 
     Twig_Autoloader::register();
     $loader = new Twig_Loader_Filesystem(Config::$templates_folder);
-    $cache = is_writable(Config::$cache_folder.'/templates') ? Config::$cache_folder.'/templates' : false;
+    $cache = is_writable(Config::$cache_folder) ? Config::$cache_folder.'/templates' : 'false';
     $twig = new Twig_Environment($loader, array(
       'cache' => $cache,
       'auto_reload' => true,

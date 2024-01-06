@@ -25,6 +25,8 @@ class Twig_Lexer implements Twig_LexerInterface
     protected $end;
     protected $state;
     protected $brackets;
+    protected $position;
+    protected $positions;
 
     protected $env;
     protected $filename;
@@ -154,12 +156,12 @@ class Twig_Lexer implements Twig_LexerInterface
 
             case $this->options['tag_block'][0]:
                 // raw data?
-                if (preg_match($this->options['lex_block_raw_regex'], $this->code, $match, null, $this->cursor)) {
+                if (preg_match($this->options['lex_block_raw_regex'], $this->code, $match, (int)'', $this->cursor)) {
                     $this->moveCursor($match[0]);
                     $this->lexRawData();
                     $this->state = self::STATE_DATA;
                 // {% line \d+ %}
-                } else if (preg_match($this->options['lex_block_line_regex'], $this->code, $match, null, $this->cursor)) {
+                } else if (preg_match($this->options['lex_block_line_regex'], $this->code, $match, (int)'', $this->cursor)) {
                     $this->moveCursor($match[0]);
                     $this->lineno = (int) $match[1];
                     $this->state = self::STATE_DATA;
@@ -178,7 +180,7 @@ class Twig_Lexer implements Twig_LexerInterface
 
     protected function lexBlock()
     {
-        if (empty($this->brackets) && preg_match($this->options['lex_block_regex'], $this->code, $match, null, $this->cursor)) {
+        if (empty($this->brackets) && preg_match($this->options['lex_block_regex'], $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::BLOCK_END_TYPE);
             $this->moveCursor($match[0]);
             $this->state = self::STATE_DATA;
@@ -189,7 +191,7 @@ class Twig_Lexer implements Twig_LexerInterface
 
     protected function lexVar()
     {
-        if (empty($this->brackets) && preg_match($this->options['lex_var_regex'], $this->code, $match, null, $this->cursor)) {
+        if (empty($this->brackets) && preg_match($this->options['lex_var_regex'], $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::VAR_END_TYPE);
             $this->moveCursor($match[0]);
             $this->state = self::STATE_DATA;
@@ -201,7 +203,7 @@ class Twig_Lexer implements Twig_LexerInterface
     protected function lexExpression()
     {
         // whitespace
-        if (preg_match('/\s+/A', $this->code, $match, null, $this->cursor)) {
+        if (preg_match('/\s+/A', $this->code, $match, (int)'', $this->cursor)) {
             $this->moveCursor($match[0]);
 
             if ($this->cursor >= $this->end) {
@@ -210,17 +212,17 @@ class Twig_Lexer implements Twig_LexerInterface
         }
 
         // operators
-        if (preg_match($this->options['operator_regex'], $this->code, $match, null, $this->cursor)) {
+        if (preg_match($this->options['operator_regex'], $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::OPERATOR_TYPE, $match[0]);
             $this->moveCursor($match[0]);
         }
         // names
-        elseif (preg_match(self::REGEX_NAME, $this->code, $match, null, $this->cursor)) {
+        elseif (preg_match(self::REGEX_NAME, $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::NAME_TYPE, $match[0]);
             $this->moveCursor($match[0]);
         }
         // numbers
-        elseif (preg_match(self::REGEX_NUMBER, $this->code, $match, null, $this->cursor)) {
+        elseif (preg_match(self::REGEX_NUMBER, $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::NUMBER_TYPE, ctype_digit($match[0]) ? (int) $match[0] : (float) $match[0]);
             $this->moveCursor($match[0]);
         }
@@ -246,7 +248,7 @@ class Twig_Lexer implements Twig_LexerInterface
             ++$this->cursor;
         }
         // strings
-        elseif (preg_match(self::REGEX_STRING, $this->code, $match, null, $this->cursor)) {
+        elseif (preg_match(self::REGEX_STRING, $this->code, $match, (int)'', $this->cursor)) {
             $this->pushToken(Twig_Token::STRING_TYPE, stripcslashes(substr($match[0], 1, -1)));
             $this->moveCursor($match[0]);
         }

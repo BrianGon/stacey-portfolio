@@ -124,7 +124,7 @@ Class Stacey {
     if($this->handle_redirects()) return;
 
     # strip any leading or trailing slashes from the passed url
-    $key = key($get);
+    $key = key($get) ?? '';
     # if the key isn't a URL path, then ignore it
     if (!preg_match('/\//', $key)) $key = false;
     $key = preg_replace(array('/\/$/', '/^\//'), '', $key);

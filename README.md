@@ -1,8 +1,21 @@
-# Stacey 3.0.0
+# Stacey 3.1.0 (Unofficial PHP 8 Retrofit)
 
 ## Overview
-Responsive portfolio style template for Stacey 3.0.0
-Modified from the default template for use on my own website and shared here for public usage.
+
+Responsive portfolio style template for Stacey 3 updated for compatibility with PHP 8.2.
+Modified from the default template for myself and shared here for public usage. 
+
+Patched errors related to PHP 8: 
+
+- in the base app, 
+
+- in the included Twig 1.x library, 
+
+- in the included SLIR library and 
+
+- updated the Markdown Extra parser library to the last version.
+
+All the libraries remain close to the original versions and aren't composer managed to keep it simple, hence retrofit rather than update. 
 
 Stacey takes content from `.yml` files, image files and implied directory structure and generates a website.
 It is a no-database, dynamic website generator.

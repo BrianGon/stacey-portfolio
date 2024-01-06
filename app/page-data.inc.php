@@ -1,5 +1,7 @@
 <?php
 
+use Michelf\MarkdownExtra;
+
 Class PageData {
 
   static $shared = false;
@@ -203,9 +205,7 @@ Class PageData {
   }
 
   static function preparse_text($text) {
-    $content = preg_replace_callback('/:\s*(\n)?\+{3,}([\S\s]*?)\+{3,}/', create_function('$match',
-      'return ": |\n  ".preg_replace("/\n/", "\n  ", $match[2]);'
-    ), $text);
+    $content = preg_replace_callback('/:\s*(\n)?\+{3,}([\S\s]*?)\+{3,}/', function($match) {return ": |\n  ".preg_replace("/\n/", "\n  ", $match[2]);}, $text);
     return $content;
   }
 
@@ -250,7 +250,7 @@ Class PageData {
       if (!is_string($value)) {
         $vars[$key] = $value;
       } else if ($markdown_compatible && strpos($value, "\n") !== false) {
-        $vars[$key] = Markdown(trim($value));
+        $vars[$key] = MarkdownExtra::defaultTransform(trim($value));
       } else {
         $vars[$key] = trim($value);
       }
