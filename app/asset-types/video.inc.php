@@ -2,7 +2,7 @@
 
 Class Video extends Asset {
 
-  static $identifiers = array('mov', 'mp4', 'm4v', 'swf');
+  static $identifiers = array('mov', 'mp4', 'm4v');
 
   function __construct($file_path) {
     # create and store data required for this asset

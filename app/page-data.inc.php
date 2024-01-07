@@ -186,7 +186,7 @@ Class PageData {
     # page.video
     $page->video = Helpers::list_files($page->file_path, '/\.(mov|mp4|m4v)$/i', false);
 
-    # page.swf, page.html, page.doc, page.pdf, page.mp3, etc.
+    # page.html, page.doc, page.pdf, page.mp3, etc.
     # create a variable for each file type included within the page's folder (excluding .yml files)
     $assets = self::get_file_types($page->file_path);
     foreach($assets as $asset_type => $asset_files) {
