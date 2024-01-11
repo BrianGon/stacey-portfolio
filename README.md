@@ -8,14 +8,13 @@ Modified from the default template for myself and shared here for public usage.
 Patched errors related to PHP 8: 
 
 - in the base app, 
-
 - in the included Twig 1.x library, 
-
 - in the included SLIR library and 
-
 - updated the Markdown Extra parser library to the last version.
 
-All the libraries remain close to the original versions and aren't composer managed to keep it simple, hence retrofit rather than update. 
+All the libraries remain close to the original versions and aren't composer managed to keep it simple, hence a retrofit rather than update. 
+
+---
 
 Stacey takes content from `.yml` files, image files and implied directory structure and generates a website.
 It is a no-database, dynamic website generator.
@@ -25,8 +24,6 @@ If you look in the `/content` and `/templates` folders, you should get the gener
 ## Installation
 
 Copy to server, `chmod 777 app/_cache`.
-
-If you want clean urls, `mv htaccess .htaccess`
 
 ## Templates
 
